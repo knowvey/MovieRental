@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="cinemadbModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="cinemadbModelStoreContainer">
+          <EntitySet Name="customer" EntityType="cinemadbModel.Store.customer" store:Type="Tables" Schema="cinemadb" />
+          <EntitySet Name="movies" EntityType="cinemadbModel.Store.movies" store:Type="Tables" Schema="cinemadb" />
+          <EntitySet Name="rental_status" EntityType="cinemadbModel.Store.rental_status" store:Type="Tables" Schema="cinemadb" />
+        </EntityContainer>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="last_name" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="mobile_number" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="email_address" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="movies">
+          <Key>
+            <PropertyRef Name="idmovies" />
+          </Key>
+          <Property Name="idmovies" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="movie_title" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="number_in_stock" Type="int" Nullable="false" />
+          <Property Name="rental_daily_rate" Type="double" Nullable="false" />
+          <Property Name="release_year" Type="int" Nullable="false" />
+          <Property Name="image" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="rental_status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="idmovies" Type="int" Nullable="false" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="qty" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="due_date" Type="date" Nullable="false" />
+          <Property Name="rent_date" Type="date" Nullable="false" />
+          <Property Name="rental_statuscol" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cinemadbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="cinemadbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="customers" EntityType="cinemadbModel.customer" />
+          <EntitySet Name="movies" EntityType="cinemadbModel.movie" />
+          <EntitySet Name="rental_status" EntityType="cinemadbModel.rental_status" />
+        </EntityContainer>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="mobile_number" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="email_address" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="movie">
+          <Key>
+            <PropertyRef Name="idmovies" />
+          </Key>
+          <Property Name="idmovies" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="movie_title" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="number_in_stock" Type="Int32" Nullable="false" />
+          <Property Name="rental_daily_rate" Type="Double" Nullable="false" />
+          <Property Name="release_year" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="rental_status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="idmovies" Type="Int32" Nullable="false" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="qty" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="due_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="rent_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="rental_statuscol" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cinemadbModelStoreContainer" CdmEntityContainer="cinemadbEntities">
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="cinemadbModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="mobile_number" ColumnName="mobile_number" />
+                <ScalarProperty Name="email_address" ColumnName="email_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movies">
+            <EntityTypeMapping TypeName="cinemadbModel.movie">
+              <MappingFragment StoreEntitySet="movies">
+                <ScalarProperty Name="idmovies" ColumnName="idmovies" />
+                <ScalarProperty Name="movie_title" ColumnName="movie_title" />
+                <ScalarProperty Name="number_in_stock" ColumnName="number_in_stock" />
+                <ScalarProperty Name="rental_daily_rate" ColumnName="rental_daily_rate" />
+                <ScalarProperty Name="release_year" ColumnName="release_year" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rental_status">
+            <EntityTypeMapping TypeName="cinemadbModel.rental_status">
+              <MappingFragment StoreEntitySet="rental_status">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idmovies" ColumnName="idmovies" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="due_date" ColumnName="due_date" />
+                <ScalarProperty Name="rent_date" ColumnName="rent_date" />
+                <ScalarProperty Name="rental_statuscol" ColumnName="rental_statuscol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

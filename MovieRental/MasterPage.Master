@@ -1,0 +1,55 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.Master.cs" Inherits="MovieRental.Site1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet" />   
+    <link href="bootstrap/css/styles.css" rel="stylesheet" />
+    <link href="bootstrap/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="images/film.png" rel="icon"/>
+    <script src="bootstrap/js/jquery.min.js"></script>    
+    <script src="bootstrap/js/bootstrap.min.js"></script>         
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>    
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="script1" runat="server"></asp:ScriptManager>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar3">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" id="nav-margin" href="index.aspx"><img src="images/logo2.png" alt="Galagita Movie Rentals"/>
+            </a>
+            </div>
+            <div id="navbar3" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="<% if (activeTab=="home") { %>active<% } %>"><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="index.aspx">Home</asp:HyperLink></li>
+                    <li class="<% if (activeTab=="addMovie") { %>active<% } %>"><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="addMovie.aspx">Add Movies</asp:HyperLink></li>
+                    <li class="<% if (activeTab=="management") { %>active<% } %>"><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="management.aspx">Management</asp:HyperLink></li>                       
+                </ul>
+                <asp:UpdatePanel ID="panel1" runat="server"><ContentTemplate>  
+                <ul class="nav navbar-nav navbar-right" >                                
+                    <li class="<% if (activeTab=="cart") { %>active<% } %>" ><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="cart.aspx">Cart 
+                    <span class="glyphicon glyphicon-shopping-cart"></span><asp:Label ID="lblCartCount" runat="server" CssClass="badge" ForeColor="White"/></asp:HyperLink></li></ul></ContentTemplate></asp:UpdatePanel>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">        
+        </asp:ContentPlaceHolder>
+    </div>        
+    </form>
+</body>
+</html>
